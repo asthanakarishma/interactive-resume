@@ -33,7 +33,7 @@ var bio = {
 
     bio.display = function(){
       var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-      $("#header").prepend(formattedRole);
+      $("#header").prepend(formattedRole).css("color", "#9370db");
       var formattedName = HTMLheaderName.replace("%data%", bio.name);
       $("#header").prepend(formattedName);
       var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
@@ -70,41 +70,46 @@ var bio = {
 var work = {
   "jobs" : [
     {
-      "Employer" : "Trinity College Computer Science Dept",
+      "employer" : "Trinity College Computer Science Dept",
       "title" : "Teaching Assistant",
       "location" : "Hartford, Connecticut",
       "dates" : "January 2016 - May 2016",
-      "description" : "I assisted students in coding labs, graded assignments, and held weekly office hours"
+      "description" : "I assisted students in coding labs, graded assignments, and held weekly office hours",
+      "url" : "http://www.trincoll.edu"
     },
     {
-      "Employer" : "Trinity College Financial Aid Department",
+      "employer" : "Trinity College Financial Aid Department",
       "title" : "Admissions & Financial Aid Committee Student Representative",
       "location" : "Hartford, Connecticut",
       "dates" : "2014-present",
-      "description" : "I represent the student body on the Admissions & Financial Aid Committee. On the committee we engage in discourse over admissions policies, analyze data trends, and undertake projects regarding new scholarship initiatives, student recruitment, etc."
+      "description" : "I represent the student body on the Admissions & Financial Aid Committee. On the committee we engage in discourse over admissions policies, analyze data trends, and undertake projects regarding new scholarship initiatives, student recruitment, etc.",
+      "url" : "http://www.trincoll.edu"
 
     },
     {
-      "Employer" : "Gravitant, Inc. (Now an IBM company)",
+      "employer" : "Gravitant, Inc. (Now an IBM company)",
       "title" : "Marketing Intern",
       "location" : "Austin, Texas",
       "dates" : "2013-2014",
-      "description" : "Assisted during team meetings, helped to build and maintain company website, polished digital graphics, helped to plan and implement company events"
+      "description" : "Assisted during team meetings, helped to build and maintain company website, polished digital graphics, helped to plan and implement company events",
+      "url" : "http://www-935.ibm.com/services/us/en/it-services/systems/cloud-brokerage-service/index.html"
 
     },
     {
-      "Employer" : "Self-Employed",
+      "employer" : "Self-Employed",
       "title" : "Founder & President",
       "location" : "Austin, Texas",
       "dates" : "2013-2014",
-      "description" : "A website created to address stress felt by students at high-pressure schools which provides online interactive tutoring when students need tutoring most"
+      "description" : "A website created to address stress felt by students at high-pressure schools which provides online interactive tutoring when students need tutoring most",
+      "url" : "https://www.linkedin.com/in/karishma-asthana-918378b4"
     },
     {
-      "Employer" : "Kumon, Inc.",
+      "employer" : "Kumon, Inc.",
       "title" : "Junior Tutor",
       "location" : "Austin, Texas",
       "dates" : "March 2013-August 2013",
-      "description" : "Helped the children complete their classwork, graded and filed homework"
+      "description" : "Helped the children complete their classwork, graded and filed homework",
+      "url" : "http://www.kumon.com"
     }
   ]
 };
@@ -112,7 +117,8 @@ var work = {
 work.display = function(){
 for(job in work.jobs){
   $("#workExperience").append(HTMLworkStart);
-  var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].Employer);
+  var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+  formattedEmployer = formattedEmployer.replace("#", work.jobs[job].url);
   var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
   var formattedEmployerTitle = formattedEmployer + formattedTitle;
 
@@ -134,13 +140,13 @@ var pastWork = {
       "title" : "Silly Song App",
       "date" : "2016",
       "description" : "As a part of my iOS App Development Nanodegree, I created a simple app that would present a song based on the name input into the interactive box. I applied my knowledge of swift and iOS UI Design in order to complete this project",
-      "image" : "images/iOS-app-pic.png"
+      "images" : ["images/iOS-app-pic.png", "images/silly.song.screenshot.jpg"]
     },
     {
       "title" : "Portfolio Website",
       "date" : "2016",
       "description" : "I created a sample website that followed a given mock-up by applying my knowledge of HTML5, CSS3, Bootstrap, and Responsive Design",
-      "image" : "images/responsive-web-pic-edited.jpeg"
+      "images" : ["images/responsive-web-pic-edited.jpeg", "images/html.screenshot.jpg"]
 
     }
   ]
@@ -156,16 +162,18 @@ projects.display = function(){
     $(".project-entry:last").append(formattedDate);
     var formattedDescription = HTMLprojectDescription.replace("%data%", pastWork.projects[project].description);
     $(".project-entry:last").append(formattedDescription);
-    if (pastWork.projects[project].image.length > 0) {
-      var formattedImage = HTMLprojectImage.replace("%data%", pastWork.projects[project].image);
-      $(".project-entry:last").append(formattedImage);
+    if (pastWork.projects[project].images.length > 0) {
+      for (image in pastWork.projects[project].images){
+        var formattedImage = HTMLprojectImage.replace("%data%", pastWork.projects[project].images[image]);
+        $(".project-entry:last").append(formattedImage);
+      }
     }
   }
 }
 
 projects.display();
 
-var pastEducation = {
+var education = {
  "schools" : [
    {
    "name" : "Westwood High School",
@@ -202,30 +210,35 @@ var pastEducation = {
  };
 
  education.display = function(){
-   for (school in pastEducation.schools){
-     $("#education").append(HTMLschoolStart);
-     var formattedTitle = HTMLschoolName.replace("%data%", pastEducation.schools[school].name);
+   $("#education").append(HTMLschoolStart);
+   for (school in education.schools){
+
+     var formattedTitle = HTMLschoolName.replace("%data%", education.schools[school].name);
+     formattedTitle.replace("#", education.schools[school].url);
      $(".education-entry:last").append(formattedTitle);
-     var formattedDate = HTMLschoolDates.replace("%data%", pastEducation.schools[school].dates);
+     var formattedDate = HTMLschoolDates.replace("%data%", education.schools[school].dates);
      $(".education-entry:last").append(formattedDate);
-     var formattedDegree = HTMLschoolDegree.replace("%data%", pastEducation.schools[school].degree);
+     var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
      $(".education-entry:last").append(formattedDegree);
-     var formattedLocation = HTMLschoolLocation.replace("%data%", pastEducation.schools[school].location);
+     var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
      $(".education-entry:last").append(formattedLocation);
-     var formattedMajor = HTMLschoolMajor.replace("%data%", pastEducation.schools[school].majors);
+     var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
      $(".education-entry:last").append(formattedMajor);
    }
    $("#education").append(HTMLonlineClasses);
-   for (course in pastEducation.onlineCourses){
+   $("#education").append(HTMLonlineStart);
+   for (course in education.onlineCourses){
 
-     var formattedTitle = HTMLonlineTitle.replace("%data%", pastEducation.onlineCourses[course].title);
-     $(".education-entry:last").append(formattedTitle);
-     var formattedSchool = HTMLonlineSchool.replace("%data%", pastEducation.onlineCourses[course].school);
-     $(".education-entry:last").append(formattedSchool);
-     var formattedDates = HTMLonlineDates.replace("%data%", pastEducation.onlineCourses[course].dates);
-     $(".education-entry:last").append(formattedDates);
-     var formattedURL = HTMLonlineURL.replace("%data%", pastEducation.onlineCourses[course].url);
-     $(".education-entry:last").append(formattedURL);
+     var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
+     $(".online-entry:last").append(formattedTitle).css("padding-left", "5%");
+     formattedTitle = formattedTitle.replace("#", education.onlineCourses[course].url);
+     var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
+     $(".online-entry:last").append(formattedSchool);
+     var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].dates);
+     $(".online-entry:last").append(formattedDates);
+     var formattedURL = HTMLonlineURL.replace("%data%", "Visit Website");
+     formattedURL = formattedURL.replace("#", education.onlineCourses[course].url);
+     $(".online-entry:last").append(formattedURL);
    }
  }
 
