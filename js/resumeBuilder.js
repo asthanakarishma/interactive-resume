@@ -1,19 +1,4 @@
-/*
-$("#main").append("Karishma");
-var awesomeThoughts = "I am Karishma and I am AWESOME";
-console.log(awesomeThoughts);
-var funThoughts = awesomeThoughts.replace("AWESOME","FUN");
-$("#main").append(funThoughts)
 
-*/
-
-/*var formattedName = HTMLheaderName.replace("%data%", "Karishma Asthana");
-var formattedRole = HTMLheaderRole.replace("%data%", "Web Developer");
-
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
-
-*/
 
 // I consulted this page on the forum to help me with displaying my bio: https://discussions.udacity.com/t/bio-not-displaying-properly/183492
 var bio = {
@@ -29,7 +14,7 @@ var bio = {
       "welcomeMessage": "Hi there!",
       "skills": ["Java", "C", "Python", "HTML5", "CSS", "JavaScript", "iOS App Development", "Adobe Photoshop", "Adobe Illustrator", "Adobe Flash", "Public Speaking"],
       "biopic": "images/1932523_10200836880844736_1416304071_o.jpg"
-    }
+    };
 
     bio.display = function(){
       var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
@@ -60,7 +45,7 @@ var bio = {
 
 
 
-    }
+    };
 
     bio.display();
 
@@ -115,7 +100,7 @@ var work = {
 };
 
 work.display = function(){
-for(job in work.jobs){
+for(var job in work.jobs){
   $("#workExperience").append(HTMLworkStart);
   var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
   formattedEmployer = formattedEmployer.replace("#", work.jobs[job].url);
@@ -130,7 +115,7 @@ for(job in work.jobs){
   $(".work-entry:last").append(formattedDescription);
 
 }
-}
+};
 
 work.display();
 
@@ -154,7 +139,7 @@ var pastWork = {
 
 
 projects.display = function(){
-  for (project in pastWork.projects){
+  for (var project in pastWork.projects){
     $("#projects").append(HTMLprojectStart);
     var formattedTitle = HTMLprojectTitle.replace("%data%", pastWork.projects[project].title);
     $(".project-entry:last").append(formattedTitle);
@@ -163,13 +148,13 @@ projects.display = function(){
     var formattedDescription = HTMLprojectDescription.replace("%data%", pastWork.projects[project].description);
     $(".project-entry:last").append(formattedDescription);
     if (pastWork.projects[project].images.length > 0) {
-      for (image in pastWork.projects[project].images){
+      for (var image in pastWork.projects[project].images){
         var formattedImage = HTMLprojectImage.replace("%data%", pastWork.projects[project].images[image]);
         $(".project-entry:last").append(formattedImage);
       }
     }
   }
-}
+};
 
 projects.display();
 
@@ -211,7 +196,7 @@ var education = {
 
  education.display = function(){
    $("#education").append(HTMLschoolStart);
-   for (school in education.schools){
+   for (var school in education.schools){
 
      var formattedTitle = HTMLschoolName.replace("%data%", education.schools[school].name);
      formattedTitle.replace("#", education.schools[school].url);
@@ -227,11 +212,11 @@ var education = {
    }
    $("#education").append(HTMLonlineClasses);
    $("#education").append(HTMLonlineStart);
-   for (course in education.onlineCourses){
+   for (var course in education.onlineCourses){
 
-     var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
-     $(".online-entry:last").append(formattedTitle).css("padding-left", "5%");
-     formattedTitle = formattedTitle.replace("#", education.onlineCourses[course].url);
+     var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
+     $(".online-entry:last").append(formattedOnlineTitle).css("padding-left", "5%");
+     formattedOnlineTitle = formattedOnlineTitle.replace("#", education.onlineCourses[course].url);
      var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
      $(".online-entry:last").append(formattedSchool);
      var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].dates);
@@ -240,7 +225,7 @@ var education = {
      formattedURL = formattedURL.replace("#", education.onlineCourses[course].url);
      $(".online-entry:last").append(formattedURL);
    }
- }
+ };
 
  education.display();
 
