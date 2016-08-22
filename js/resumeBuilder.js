@@ -100,7 +100,7 @@ var work = {
 };
 
 work.display = function(){
-for(var job in work.jobs){
+for(var job = 0; job < work.jobs.length; job++){
   $("#workExperience").append(HTMLworkStart);
   var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
   formattedEmployer = formattedEmployer.replace("#", work.jobs[job].url);
@@ -139,7 +139,7 @@ var pastWork = {
 
 
 projects.display = function(){
-  for (var project in pastWork.projects){
+  for (var project = 0; project < pastWork.projects.length; project++){
     $("#projects").append(HTMLprojectStart);
     var formattedTitle = HTMLprojectTitle.replace("%data%", pastWork.projects[project].title);
     $(".project-entry:last").append(formattedTitle);
@@ -148,7 +148,7 @@ projects.display = function(){
     var formattedDescription = HTMLprojectDescription.replace("%data%", pastWork.projects[project].description);
     $(".project-entry:last").append(formattedDescription);
     if (pastWork.projects[project].images.length > 0) {
-      for (var image in pastWork.projects[project].images){
+      for (var image = 0; image < pastWork.projects[project].images.length; image++){
         var formattedImage = HTMLprojectImage.replace("%data%", pastWork.projects[project].images[image]);
         $(".project-entry:last").append(formattedImage);
       }
@@ -164,7 +164,7 @@ var education = {
    "name" : "Westwood High School",
    "location" : "Austin, Texas",
    "degree" : "none",
-   "majors" : "none",
+   "majors" : ["none"],
    "dates" : "2010-2014",
    "url" : "https://westwood.roundrockisd.org"
 
@@ -173,7 +173,7 @@ var education = {
    "name" : "Trinity College",
    "location" : "Hartford, Connecticut",
    "degree" : "B.S.",
-   "majors" : "Computer Science, Psychology",
+   "majors" : ["Computer Science, Psychology"],
    "dates": "2014-2018",
    "url" : "http://www.trincoll.edu"
 
@@ -196,7 +196,7 @@ var education = {
 
  education.display = function(){
    $("#education").append(HTMLschoolStart);
-   for (var school in education.schools){
+   for (var school = 0; school < education.schools.length; school++){
 
      var formattedTitle = HTMLschoolName.replace("%data%", education.schools[school].name);
      formattedTitle.replace("#", education.schools[school].url);
@@ -207,12 +207,15 @@ var education = {
      $(".education-entry:last").append(formattedDegree);
      var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
      $(".education-entry:last").append(formattedLocation);
-     var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
-     $(".education-entry:last").append(formattedMajor);
+     for(var major = 0; major < education.schools[school].majors.length; major++){
+       var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors[major]);
+       $(".education-entry:last").append(formattedMajor);
    }
+ }
+
    $("#education").append(HTMLonlineClasses);
    $("#education").append(HTMLonlineStart);
-   for (var course in education.onlineCourses){
+   for (var course = 0; course < education.onlineCourses.length; course++){
 
      var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
      $(".online-entry:last").append(formattedOnlineTitle).css("padding-left", "5%");
